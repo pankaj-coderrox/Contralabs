@@ -8,6 +8,7 @@ import ReaderBeforeNetworkText from "@/components/ReaderBeforeNetworkText";
 
 type VisualSection = {
   alt: string;
+  extension?: "jpeg" | "png";
   height: number;
   name: string;
   priority?: boolean;
@@ -57,9 +58,17 @@ const sections: VisualSection[] = [
     alt: "The creative class sets the standard banner",
   },
   {
-    name: "09-research-execution",
-    height: 640,
-    alt: "Creative AI research and execution section",
+    name: "training-data-intro",
+    height: 901,
+    width: 1873,
+    alt: "Human taste is the new training data research section",
+  },
+  {
+    name: "laptop-on-desk",
+    extension: "jpeg",
+    height: 914,
+    width: 1600,
+    alt: "Two laptops on a desk with hands typing",
   },
   {
     name: "11-footer-artwork",
@@ -533,7 +542,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           }
         `}</style>
         <Image
-          src={`/sections/${section.name}.png`}
+          src={`/sections/${section.name}.${section.extension ?? "png"}`}
           alt={section.alt}
           width={section.width ?? 1145}
           height={section.height}
@@ -555,6 +564,8 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
         section.name === "09-research-execution"
           ? "research-execution-footer"
           : ""
+      } ${
+        section.name === "laptop-on-desk" ? "laptop-on-desk-section" : ""
       }`}
       aria-label={section.alt}
     >
@@ -776,6 +787,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             align-items: center;
             color: #000;
             display: inline-flex;
+            font-size: 0;
             height: clamp(18px, 2.2vw, 24px);
             justify-content: center;
             line-height: 1;
@@ -861,7 +873,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
         `}</style>
       ) : null}
       <Image
-        src={`/sections/${section.name}.png`}
+        src={`/sections/${section.name}.${section.extension ?? "png"}`}
         alt={section.alt}
         width={section.width ?? 1145}
         height={section.height}
@@ -965,6 +977,16 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
               </svg>
             </a>
             <a href="https://www.tiktok.com/@contra" aria-label="TikTok">
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M15.7 3c.28 2.35 1.62 3.75 3.93 3.9v3.03a7.45 7.45 0 0 1-3.93-1.2v5.76c0 2.92-1.76 5.51-5.25 5.51-3.24 0-5.17-2.38-5.17-5.01 0-2.88 2.34-5.16 5.28-5.16.33 0 .66.03.97.1v3.16a3.64 3.64 0 0 0-1.05-.15c-1.42 0-2.25.92-2.25 2.02 0 1.15.84 2.01 2.09 2.01 1.38 0 2.12-.82 2.12-2.47V3h3.26Z"
+                  fill="currentColor"
+                />
+              </svg>
               ♪
             </a>
             <a
@@ -972,6 +994,16 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
               href="https://www.pinterest.com/contra"
               aria-label="Pinterest"
             >
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12.2 2.8c-5.22 0-7.87 3.74-7.87 6.85 0 1.9.72 3.58 2.26 4.2.25.1.48 0 .55-.28.05-.19.17-.68.22-.88.07-.28.04-.38-.16-.62-.44-.52-.72-1.2-.72-2.15 0-2.78 2.08-5.28 5.42-5.28 2.96 0 4.58 1.8 4.58 4.22 0 3.17-1.4 5.85-3.49 5.85-1.15 0-2.01-.95-1.73-2.12.33-1.4.98-2.92.98-3.93 0-.91-.49-1.67-1.5-1.67-1.19 0-2.14 1.23-2.14 2.88 0 1.05.35 1.76.35 1.76s-1.21 5.13-1.42 6.03c-.42 1.79-.06 3.98-.03 4.2.02.13.19.16.27.06.11-.15 1.53-1.9 2.01-3.65.14-.5.79-3.08.79-3.08.39.74 1.53 1.39 2.75 1.39 3.61 0 6.06-3.29 6.06-7.69 0-3.33-2.82-6.43-7.16-6.43Z"
+                  fill="currentColor"
+                />
+              </svg>
               p
             </a>
           </nav>
@@ -1588,6 +1620,231 @@ function ResponsiveResearchBlock({ section }: { section: VisualSection }) {
   );
 }
 
+function TrainingDataIntroSection() {
+  return (
+    <section
+      className="training-data-intro"
+      aria-label="Human taste is the new training data"
+    >
+      <style>{`
+        .training-data-intro {
+          background: #f7f4ee;
+          color: #252321;
+          padding: clamp(78px, 8.4vw, 118px) clamp(46px, 8.2vw, 94px)
+            clamp(82px, 9vw, 128px);
+          position: relative;
+        }
+
+        .training-data-intro__mark {
+          background: #86aaa3;
+          height: clamp(70px, 7vw, 104px);
+          left: clamp(24px, 3.7vw, 48px);
+          position: absolute;
+          top: 0;
+          width: clamp(34px, 3.8vw, 58px);
+        }
+
+        .training-data-intro__mark::before {
+          color: #fff;
+          content: "✦";
+          font-size: clamp(22px, 2.5vw, 36px);
+          left: 50%;
+          position: absolute;
+          top: 26%;
+          transform: translate(-50%, -50%);
+        }
+
+        .training-data-intro__mark::after {
+          border-left: clamp(17px, 1.9vw, 29px) solid transparent;
+          border-right: clamp(17px, 1.9vw, 29px) solid transparent;
+          border-top: clamp(17px, 1.9vw, 29px) solid #86aaa3;
+          bottom: calc(clamp(17px, 1.9vw, 29px) * -1);
+          content: "";
+          left: 0;
+          position: absolute;
+        }
+
+        .training-data-intro__grid {
+          align-items: center;
+          display: grid;
+          gap: clamp(58px, 8vw, 112px);
+          grid-template-columns: minmax(0, 0.98fr) minmax(0, 1fr);
+        }
+
+        .training-data-intro__media {
+          aspect-ratio: 1 / 0.9;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .training-data-intro__media img {
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          width: 100%;
+        }
+
+        .training-data-intro__media::before {
+          background: linear-gradient(
+            180deg,
+            rgba(12, 13, 12, 0) 0%,
+            rgba(12, 13, 12, 0.82) 42%,
+            rgba(12, 13, 12, 0.96) 100%
+          );
+          bottom: 0;
+          content: "";
+          height: 43%;
+          left: 0;
+          pointer-events: none;
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+        }
+
+        .training-data-intro__media::after {
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 42%,
+            rgba(0, 0, 0, 0.46) 100%
+          );
+          content: "";
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+          z-index: 1;
+        }
+
+        .training-data-intro__caption {
+          bottom: clamp(28px, 3.4vw, 48px);
+          color: #fffaf3;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(38px, 4.7vw, 64px);
+          font-weight: 400;
+          left: clamp(28px, 4.4vw, 52px);
+          letter-spacing: 0;
+          line-height: 0.94;
+          margin: 0;
+          max-width: 560px;
+          position: absolute;
+          text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34);
+          z-index: 2;
+        }
+
+        .training-data-intro__copy {
+          padding-top: clamp(8px, 2vw, 28px);
+        }
+
+        .training-data-intro__copy h2 {
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(48px, 5.3vw, 72px);
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1.02;
+          margin: 0;
+          max-width: 660px;
+        }
+
+        .training-data-intro__copy p {
+          font-size: clamp(18px, 2vw, 28px);
+          font-weight: 400;
+          line-height: 1.14;
+          margin: clamp(28px, 3.1vw, 38px) 0 0;
+          max-width: 620px;
+        }
+
+        @media (max-width: 900px) {
+          .training-data-intro {
+            padding: 74px 22px 64px;
+          }
+
+          .training-data-intro__mark {
+            height: 76px;
+            left: 20px;
+            width: 38px;
+          }
+
+          .training-data-intro__mark::after {
+            border-left-width: 19px;
+            border-right-width: 19px;
+            border-top-width: 19px;
+            bottom: -19px;
+          }
+
+          .training-data-intro__grid {
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
+          }
+
+          .training-data-intro__media {
+            aspect-ratio: 1 / 0.86;
+            order: 1;
+            width: 100%;
+          }
+
+          .training-data-intro__caption {
+            bottom: 26px;
+            font-size: clamp(34px, 11vw, 52px);
+            left: 28px;
+            max-width: 88%;
+          }
+
+          .training-data-intro__media::before {
+            height: 46%;
+            width: 100%;
+          }
+
+          .training-data-intro__copy {
+            order: 2;
+            padding: 0 4px;
+            width: 100%;
+          }
+
+          .training-data-intro__copy h2 {
+            font-size: clamp(34px, 10vw, 48px);
+            line-height: 1.03;
+            max-width: 360px;
+          }
+
+          .training-data-intro__copy p {
+            font-size: clamp(17px, 4.8vw, 21px);
+            line-height: 1.18;
+            margin-top: 18px;
+          }
+        }
+      `}</style>
+      <span className="training-data-intro__mark" aria-hidden="true" />
+      <div className="training-data-intro__grid">
+        <div className="training-data-intro__media">
+          <Image
+            src="/sections/leading-research-landscape-new.png"
+            alt="Pastoral landscape used for creative AI research"
+            width={1319}
+            height={1192}
+            sizes="(max-width: 900px) 100vw, 46vw"
+          />
+          <p className="training-data-intro__caption">
+            Leading next-gen creative
+            <br />
+            AI research.
+          </p>
+        </div>
+        <div className="training-data-intro__copy">
+          <h2>
+            Human taste is the
+            <br />
+            new training data.
+          </h2>
+          <p>
+            Creative AI isn&apos;t good enough yet. Human creativity keeps
+            evolving. We&apos;re here to make sure it leads.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main className="visual-site">
@@ -1626,7 +1883,11 @@ export default function Home() {
         }
 
         if (section.name === "08-standard-banner") {
-          return <ResponsiveResearchBlock key="responsive-research" section={section} />;
+          return null;
+        }
+
+        if (section.name === "training-data-intro") {
+          return <TrainingDataIntroSection key={section.name} />;
         }
 
         if (section.name === "07-standard-dark-art") {
@@ -1969,6 +2230,252 @@ function EcosystemCardsGrid({
 function FooterBlock({ artwork }: { artwork: VisualSection }) {
   return (
     <footer className="site-footer" aria-label="Footer">
+      <section className="site-footer__intro" aria-label="Contra Labs footer links">
+        <style>{`
+          .site-footer {
+            background: #fbfaf6;
+            clear: both;
+            isolation: isolate;
+            position: relative;
+            z-index: 1;
+          }
+
+          .site-footer__intro {
+            align-items: center;
+            background: #fbfaf6;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            margin-top: 0;
+            padding: clamp(72px, 10vw, 124px) clamp(24px, 6vw, 72px)
+              clamp(44px, 6.5vw, 72px);
+            position: relative;
+            text-align: center;
+            z-index: 2;
+          }
+
+          .site-footer__brand {
+            align-items: baseline;
+            color: #000;
+            display: inline-flex;
+            gap: 0.2em;
+            line-height: 0.88;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+
+          .site-footer__brand-strong {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(44px, 6vw, 70px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+          }
+
+          .site-footer__brand-light {
+            font-size: clamp(31px, 4.1vw, 48px);
+            font-weight: 700;
+            letter-spacing: 0;
+          }
+
+          .site-footer__tagline {
+            color: #000;
+            font-size: clamp(15px, 1.55vw, 20px);
+            font-weight: 500;
+            line-height: 1.28;
+            margin: clamp(24px, 3vw, 34px) 0 0;
+            max-width: 390px;
+          }
+
+          .site-footer__socials {
+            align-items: center;
+            display: flex;
+            gap: clamp(20px, 3vw, 34px);
+            justify-content: center;
+            margin-top: clamp(46px, 5vw, 62px);
+          }
+
+          .site-footer__socials a {
+            align-items: center;
+            color: #000;
+            display: inline-flex;
+            font-size: 0;
+            height: clamp(19px, 2.2vw, 26px);
+            justify-content: center;
+            line-height: 1;
+            text-decoration: none;
+            width: clamp(19px, 2.2vw, 26px);
+          }
+
+          .site-footer__social-icon {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
+
+          .site-footer__nav {
+            align-items: center;
+            display: flex;
+            gap: clamp(42px, 15vw, 250px);
+            justify-content: center;
+            margin-top: clamp(66px, 8vw, 96px);
+            width: 100%;
+          }
+
+          .site-footer__nav a {
+            color: #000;
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 500;
+            line-height: 1;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+
+          @media (max-width: 700px) {
+            .site-footer__intro {
+              padding: 64px 24px 48px;
+            }
+
+            .site-footer__brand-strong {
+              font-size: clamp(38px, 12vw, 56px);
+            }
+
+            .site-footer__brand-light {
+              font-size: clamp(27px, 8.5vw, 39px);
+            }
+
+            .site-footer__tagline {
+              font-size: clamp(14px, 4vw, 18px);
+              max-width: 300px;
+            }
+
+            .site-footer__socials {
+              gap: 22px;
+              margin-top: 38px;
+            }
+
+            .site-footer__socials a {
+              height: clamp(19px, 5.5vw, 26px);
+              width: clamp(19px, 5.5vw, 26px);
+            }
+
+            .site-footer__nav {
+              flex-direction: column;
+              gap: 16px;
+              margin-top: 52px;
+            }
+          }
+        `}</style>
+        <a className="site-footer__brand" href="https://contralabs.com/">
+          <span className="site-footer__brand-strong">contra</span>
+          <span className="site-footer__brand-light">LABS</span>
+        </a>
+        <p className="site-footer__tagline">
+          The world's leading independent
+          <br />
+          human data &amp; creative evaluation lab
+        </p>
+        <nav className="site-footer__socials" aria-label="Social links">
+          <a href="https://x.com/contra" aria-label="X">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 4L20 20M20 4L4 20"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="2"
+              />
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@contra" aria-label="YouTube">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M21.4 7.1a3 3 0 0 0-2.1-2.1C17.5 4.5 12 4.5 12 4.5s-5.5 0-7.3.5a3 3 0 0 0-2.1 2.1A31.7 31.7 0 0 0 2.1 12a31.7 31.7 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.8.5 7.3.5 7.3.5s5.5 0 7.3-.5a3 3 0 0 0 2.1-2.1 31.7 31.7 0 0 0 .5-4.9 31.7 31.7 0 0 0-.5-4.9Z"
+                fill="currentColor"
+              />
+              <path d="M10 15.4V8.6L15.8 12 10 15.4Z" fill="#fbfaf6" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/contra" aria-label="LinkedIn">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.5 3h-17A.5.5 0 0 0 3 3.5v17a.5.5 0 0 0 .5.5h17a.5.5 0 0 0 .5-.5v-17a.5.5 0 0 0-.5-.5ZM8.4 18.3H5.7V9.7h2.7v8.6ZM7 8.5a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1Zm11.3 9.8h-2.7v-4.2c0-1-.02-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.2v4.3H9.9V9.7h2.6v1.2h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13v4.67Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/contra" aria-label="Instagram">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="4"
+                y="4"
+                width="16"
+                height="16"
+                rx="4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="3.6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <circle cx="16.9" cy="7.1" r="1.1" fill="currentColor" />
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@contra" aria-label="TikTok">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M15.7 3c.28 2.35 1.62 3.75 3.93 3.9v3.03a7.45 7.45 0 0 1-3.93-1.2v5.76c0 2.92-1.76 5.51-5.25 5.51-3.24 0-5.17-2.38-5.17-5.01 0-2.88 2.34-5.16 5.28-5.16.33 0 .66.03.97.1v3.16a3.64 3.64 0 0 0-1.05-.15c-1.42 0-2.25.92-2.25 2.02 0 1.15.84 2.01 2.09 2.01 1.38 0 2.12-.82 2.12-2.47V3h3.26Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+          <a href="https://www.pinterest.com/contra" aria-label="Pinterest">
+            <svg
+              className="site-footer__social-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12.2 2.8c-5.22 0-7.87 3.74-7.87 6.85 0 1.9.72 3.58 2.26 4.2.25.1.48 0 .55-.28.05-.19.17-.68.22-.88.07-.28.04-.38-.16-.62-.44-.52-.72-1.2-.72-2.15 0-2.78 2.08-5.28 5.42-5.28 2.96 0 4.58 1.8 4.58 4.22 0 3.17-1.4 5.85-3.49 5.85-1.15 0-2.01-.95-1.73-2.12.33-1.4.98-2.92.98-3.93 0-.91-.49-1.67-1.5-1.67-1.19 0-2.14 1.23-2.14 2.88 0 1.05.35 1.76.35 1.76s-1.21 5.13-1.42 6.03c-.42 1.79-.06 3.98-.03 4.2.02.13.19.16.27.06.11-.15 1.53-1.9 2.01-3.65.14-.5.79-3.08.79-3.08.39.74 1.53 1.39 2.75 1.39 3.61 0 6.06-3.29 6.06-7.69 0-3.33-2.82-6.43-7.16-6.43Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        </nav>
+        <nav className="site-footer__nav" aria-label="Footer navigation">
+          <a href="https://contralabs.com/contact">Get In Touch</a>
+          <a href="https://contralabs.com/creative-human-data">
+            Creative Human Data
+          </a>
+          <a href="https://contralabs.com/research">Creative Arena</a>
+          <a href="https://contralabs.com/jobs">Jobs</a>
+        </nav>
+      </section>
       <section className="footer-artwork" aria-label={artwork.alt}>
         <style>{`
           .footer-artwork {
