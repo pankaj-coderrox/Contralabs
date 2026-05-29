@@ -335,8 +335,10 @@ video {
   }
 
   .hero-image-section {
-    aspect-ratio: 626 / 654;
+    aspect-ratio: auto;
     background: var(--background);
+    height: 100svh;
+    min-height: 640px;
   }
 
   .hero-image-section img,

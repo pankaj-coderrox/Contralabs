@@ -461,7 +461,6 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             display: "block",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center -8px",
             transform: "translate3d(0, 0, 0)",
             width: "100%",
           }}
@@ -551,6 +550,10 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
       } ${
         section.name === "05-reader-before-network"
           ? "reader-before-network"
+          : ""
+      } ${
+        section.name === "09-research-execution"
+          ? "research-execution-footer"
           : ""
       }`}
       aria-label={section.alt}
@@ -690,6 +693,173 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           }
         `}</style>
       ) : null}
+      {section.name === "09-research-execution" ? (
+        <style>{`
+          .research-execution-footer {
+            position: relative;
+          }
+
+          .research-execution-footer__links {
+            align-items: center;
+            background: #fbfaf6;
+            bottom: 0;
+            display: flex;
+            gap: clamp(18px, 3vw, 42px);
+            justify-content: space-between;
+            left: 0;
+            min-height: clamp(46px, 5.6vw, 64px);
+            padding: 0 clamp(60px, 10vw, 118px);
+            position: absolute;
+            right: 0;
+            z-index: 2;
+          }
+
+          .research-execution-footer__brand-panel {
+            align-items: center;
+            background: #fbfaf6;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            left: 50%;
+            min-width: min(430px, 54%);
+            padding: clamp(10px, 1.6vw, 18px) clamp(20px, 3.4vw, 38px);
+            position: absolute;
+            text-align: center;
+            top: 50.5%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+          }
+
+          .research-execution-footer__brand {
+            color: #000;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.2em;
+            line-height: 0.88;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+
+          .research-execution-footer__brand-strong {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(44px, 5.4vw, 64px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+          }
+
+          .research-execution-footer__brand-light {
+            font-size: clamp(31px, 3.7vw, 44px);
+            font-weight: 700;
+            letter-spacing: 0;
+          }
+
+          .research-execution-footer__tagline {
+            color: #000;
+            font-size: clamp(15px, 1.7vw, 21px);
+            font-weight: 500;
+            line-height: 1.28;
+            margin: clamp(24px, 3.2vw, 34px) 0 0;
+            max-width: 360px;
+          }
+
+          .research-execution-footer__socials {
+            align-items: center;
+            background: #fbfaf6;
+            display: flex;
+            gap: clamp(18px, 2.5vw, 28px);
+            justify-content: center;
+            margin-top: clamp(50px, 5.6vw, 68px);
+            padding: 2px 8px;
+          }
+
+          .research-execution-footer__socials a {
+            align-items: center;
+            color: #000;
+            display: inline-flex;
+            height: clamp(18px, 2.2vw, 24px);
+            justify-content: center;
+            line-height: 1;
+            text-decoration: none;
+            width: clamp(18px, 2.2vw, 24px);
+          }
+
+          .research-execution-footer__socials a:hover,
+          .research-execution-footer__socials a:focus-visible {
+            color: #000;
+          }
+
+          .research-execution-footer__social-icon {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
+
+          .research-execution-footer__links a {
+            color: #000;
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 500;
+            line-height: 1;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+
+          @media (max-width: 700px) {
+            .research-execution-footer {
+              background: #fbfaf6;
+              min-height: 540px;
+            }
+
+            .research-execution-footer > img {
+              height: 100%;
+              object-fit: cover;
+              object-position: center top;
+              width: 100%;
+            }
+
+            .research-execution-footer__brand-panel {
+              min-width: min(360px, 84%);
+              padding: 12px 18px;
+              top: 44%;
+            }
+
+            .research-execution-footer__brand-strong {
+              font-size: clamp(38px, 12vw, 56px);
+            }
+
+            .research-execution-footer__brand-light {
+              font-size: clamp(27px, 8.5vw, 39px);
+            }
+
+            .research-execution-footer__tagline {
+              font-size: clamp(14px, 4vw, 18px);
+              margin-top: 22px;
+              max-width: 300px;
+            }
+
+            .research-execution-footer__socials {
+              gap: 20px;
+              margin-top: 34px;
+            }
+
+            .research-execution-footer__socials a {
+              height: clamp(19px, 5.4vw, 26px);
+              width: clamp(19px, 5.4vw, 26px);
+            }
+
+            .research-execution-footer__links {
+              flex-direction: column;
+              gap: 12px;
+              justify-content: center;
+              min-height: 132px;
+              padding: 0 clamp(20px, 6vw, 34px);
+            }
+
+            .research-execution-footer__links a {
+              font-size: clamp(12px, 2.8vw, 14px);
+            }
+          }
+        `}</style>
+      ) : null}
       <Image
         src={`/sections/${section.name}.png`}
         alt={section.alt}
@@ -700,6 +870,125 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
       />
       {section.name === "05-reader-before-network" ? (
         <ReaderBeforeNetworkText />
+      ) : null}
+      {section.name === "09-research-execution" ? (
+        <div className="research-execution-footer__brand-panel">
+          <a
+            className="research-execution-footer__brand"
+            href="https://contralabs.com/"
+          >
+            <span className="research-execution-footer__brand-strong">
+              contra
+            </span>
+            <span className="research-execution-footer__brand-light">LABS</span>
+          </a>
+          <p className="research-execution-footer__tagline">
+            The world's leading independent
+            <br />
+            human data &amp; creative evaluation lab
+          </p>
+          <nav
+            className="research-execution-footer__socials"
+            aria-label="Social links"
+          >
+            <a href="https://x.com/contra" aria-label="X">
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 4L20 20M20 4L4 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth="2"
+                />
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@contra" aria-label="YouTube">
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M21.4 7.1a3 3 0 0 0-2.1-2.1C17.5 4.5 12 4.5 12 4.5s-5.5 0-7.3.5a3 3 0 0 0-2.1 2.1A31.7 31.7 0 0 0 2.1 12a31.7 31.7 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.8.5 7.3.5 7.3.5s5.5 0 7.3-.5a3 3 0 0 0 2.1-2.1 31.7 31.7 0 0 0 .5-4.9 31.7 31.7 0 0 0-.5-4.9Z"
+                  fill="currentColor"
+                />
+                <path d="M10 15.4V8.6L15.8 12 10 15.4Z" fill="#fbfaf6" />
+              </svg>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/contra"
+              aria-label="LinkedIn"
+            >
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.5 3h-17A.5.5 0 0 0 3 3.5v17a.5.5 0 0 0 .5.5h17a.5.5 0 0 0 .5-.5v-17a.5.5 0 0 0-.5-.5ZM8.4 18.3H5.7V9.7h2.7v8.6ZM7 8.5a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1Zm11.3 9.8h-2.7v-4.2c0-1-.02-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.2v4.3H9.9V9.7h2.6v1.2h.04c.36-.68 1.24-1.4 2.55-1.4 2.73 0 3.23 1.8 3.23 4.13v4.67Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/contra"
+              aria-label="Instagram"
+            >
+              <svg
+                className="research-execution-footer__social-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect
+                  x="4"
+                  y="4"
+                  width="16"
+                  height="16"
+                  rx="4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3.6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <circle cx="16.9" cy="7.1" r="1.1" fill="currentColor" />
+              </svg>
+            </a>
+            <a href="https://www.tiktok.com/@contra" aria-label="TikTok">
+              ♪
+            </a>
+            <a
+              className="research-execution-footer__social--pinterest"
+              href="https://www.pinterest.com/contra"
+              aria-label="Pinterest"
+            >
+              p
+            </a>
+          </nav>
+        </div>
+      ) : null}
+      {section.name === "09-research-execution" ? (
+        <nav
+          className="research-execution-footer__links"
+          aria-label="Footer navigation"
+        >
+          <a href="https://contralabs.com/contact">Get In Touch</a>
+          <a href="https://contralabs.com/creative-human-data">
+            Creative Human Data
+          </a>
+          <a href="https://contralabs.com/research">Creative Arena</a>
+          <a href="https://contralabs.com/jobs">Jobs</a>
+        </nav>
       ) : null}
     </section>
   );

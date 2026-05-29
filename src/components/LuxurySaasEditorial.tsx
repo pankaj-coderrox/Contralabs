@@ -242,7 +242,7 @@ export default function LuxurySaasEditorial() {
         }
 
         .luxury-editorial__marquee-content {
-          animation: luxury-editorial-scroll-up 80s linear infinite;
+          animation: luxury-editorial-scroll-up 42s linear infinite;
           display: flex;
           flex-direction: column;
           gap: 8px;
@@ -262,7 +262,7 @@ export default function LuxurySaasEditorial() {
         }
 
         .luxury-editorial__company-name {
-          color: #7a7a7a;
+          color: #5f5f5f;
           flex: 0 0 170px;
           font-weight: 600;
           text-align: right;
@@ -270,7 +270,7 @@ export default function LuxurySaasEditorial() {
         }
 
         .luxury-editorial__company-desc {
-          color: #999;
+          color: #747474;
           font-weight: 400;
           min-width: 0;
           text-align: left;
