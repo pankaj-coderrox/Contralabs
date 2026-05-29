@@ -872,6 +872,89 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           }
         `}</style>
       ) : null}
+      {section.name === "laptop-on-desk" ? (
+        <style>{`
+          .laptop-on-desk-section {
+            position: relative;
+          }
+
+          .laptop-on-desk-section::after {
+            background: transparent;
+            content: "";
+            inset: 0;
+            pointer-events: none;
+            position: absolute;
+            z-index: 1;
+          }
+
+          .laptop-on-desk__content {
+            color: #fffaf3;
+            left: 50%;
+            max-width: min(620px, 50%);
+            position: absolute;
+            text-align: center;
+            top: 48%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            z-index: 2;
+          }
+
+          .laptop-on-desk__content h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(30px, 3.45vw, 48px);
+            font-weight: 400;
+            letter-spacing: 0;
+            line-height: 1;
+            margin: 0;
+          }
+
+          .laptop-on-desk__content p {
+            font-size: clamp(13px, 1.25vw, 18px);
+            font-weight: 800;
+            line-height: 1.16;
+            margin: clamp(12px, 1.35vw, 18px) auto 0;
+            max-width: 500px;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.24);
+          }
+
+          .laptop-on-desk__button {
+            align-items: center;
+            background: #252321;
+            border-radius: 999px;
+            color: #fffaf3;
+            display: inline-flex;
+            font-size: clamp(12px, 1vw, 14px);
+            font-weight: 700;
+            justify-content: center;
+            line-height: 1;
+            margin-top: clamp(22px, 3vw, 42px);
+            min-height: clamp(40px, 4vw, 52px);
+            padding: 0 clamp(24px, 2.6vw, 36px);
+            text-decoration: none;
+          }
+
+          @media (max-width: 700px) {
+            .laptop-on-desk__content {
+              display: none;
+            }
+
+            .laptop-on-desk__content h2 {
+              font-size: clamp(24px, 6.8vw, 36px);
+            }
+
+            .laptop-on-desk__content p {
+              font-size: clamp(11px, 3.1vw, 15px);
+              max-width: 290px;
+            }
+
+            .laptop-on-desk__button {
+              font-size: 13px;
+              min-height: 42px;
+              padding: 0 24px;
+            }
+          }
+        `}</style>
+      ) : null}
       <Image
         src={`/sections/${section.name}.${section.extension ?? "png"}`}
         alt={section.alt}
@@ -880,6 +963,25 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
         priority={section.priority}
         sizes={`(max-width: ${section.width ?? 1145}px) 100vw, ${section.width ?? 1145}px`}
       />
+      {section.name === "laptop-on-desk" ? (
+        <div className="laptop-on-desk__content">
+          <h2>
+            Execution is free.
+            <br />
+            Now, judgment is everything.
+          </h2>
+          <p>
+            Move beyond benchmark scores and uncover the qualitative signals
+            that shape user preference.
+          </p>
+          <a
+            className="laptop-on-desk__button"
+            href="https://contralabs.com/contact"
+          >
+            Request partnership
+          </a>
+        </div>
+      ) : null}
       {section.name === "05-reader-before-network" ? (
         <ReaderBeforeNetworkText />
       ) : null}
@@ -1667,12 +1769,12 @@ function TrainingDataIntroSection() {
         .training-data-intro__grid {
           align-items: center;
           display: grid;
-          gap: clamp(58px, 8vw, 112px);
-          grid-template-columns: minmax(0, 0.98fr) minmax(0, 1fr);
+          gap: clamp(46px, 6vw, 86px);
+          grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
         }
 
         .training-data-intro__media {
-          aspect-ratio: 1 / 0.9;
+          aspect-ratio: 1.18 / 1;
           overflow: hidden;
           position: relative;
         }
@@ -1685,46 +1787,24 @@ function TrainingDataIntroSection() {
         }
 
         .training-data-intro__media::before {
-          background: linear-gradient(
-            180deg,
-            rgba(12, 13, 12, 0) 0%,
-            rgba(12, 13, 12, 0.82) 42%,
-            rgba(12, 13, 12, 0.96) 100%
-          );
-          bottom: 0;
-          content: "";
-          height: 43%;
-          left: 0;
-          pointer-events: none;
-          position: absolute;
-          width: 100%;
-          z-index: 1;
+          display: none;
         }
 
         .training-data-intro__media::after {
-          background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 42%,
-            rgba(0, 0, 0, 0.46) 100%
-          );
-          content: "";
-          inset: 0;
-          pointer-events: none;
-          position: absolute;
-          z-index: 1;
+          display: none;
         }
 
         .training-data-intro__caption {
-          bottom: clamp(28px, 3.4vw, 48px);
+          bottom: clamp(24px, 3vw, 38px);
           color: #fffaf3;
           font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(38px, 4.7vw, 64px);
+          font-size: clamp(28px, 2.95vw, 40px);
           font-weight: 400;
-          left: clamp(28px, 4.4vw, 52px);
+          left: clamp(26px, 3.8vw, 46px);
           letter-spacing: 0;
-          line-height: 0.94;
+          line-height: 0.96;
           margin: 0;
-          max-width: 560px;
+          max-width: 520px;
           position: absolute;
           text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34);
           z-index: 2;
@@ -1736,12 +1816,12 @@ function TrainingDataIntroSection() {
 
         .training-data-intro__copy h2 {
           font-family: Georgia, "Times New Roman", serif;
-          font-size: clamp(48px, 5.3vw, 72px);
+          font-size: clamp(38px, 3.95vw, 54px);
           font-weight: 400;
           letter-spacing: 0;
           line-height: 1.02;
           margin: 0;
-          max-width: 660px;
+          max-width: 640px;
         }
 
         .training-data-intro__copy p {
@@ -1777,16 +1857,16 @@ function TrainingDataIntroSection() {
           }
 
           .training-data-intro__media {
-            aspect-ratio: 1 / 0.86;
+            aspect-ratio: 1.12 / 1;
             order: 1;
             width: 100%;
           }
 
           .training-data-intro__caption {
-            bottom: 26px;
-            font-size: clamp(34px, 11vw, 52px);
-            left: 28px;
-            max-width: 88%;
+            bottom: 24px;
+            font-size: clamp(28px, 8vw, 40px);
+            left: 24px;
+            max-width: calc(100% - 48px);
           }
 
           .training-data-intro__media::before {
@@ -1801,7 +1881,7 @@ function TrainingDataIntroSection() {
           }
 
           .training-data-intro__copy h2 {
-            font-size: clamp(34px, 10vw, 48px);
+            font-size: clamp(32px, 9vw, 44px);
             line-height: 1.03;
             max-width: 360px;
           }
@@ -1813,7 +1893,6 @@ function TrainingDataIntroSection() {
           }
         }
       `}</style>
-      <span className="training-data-intro__mark" aria-hidden="true" />
       <div className="training-data-intro__grid">
         <div className="training-data-intro__media">
           <Image
@@ -1840,6 +1919,97 @@ function TrainingDataIntroSection() {
             evolving. We&apos;re here to make sure it leads.
           </p>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function CharcoalJudgmentSection() {
+  return (
+    <section
+      className="charcoal-judgment-section"
+      aria-label="Execution and judgment"
+    >
+      <style>{`
+        .charcoal-judgment-section {
+          align-items: center;
+          background: #262626;
+          color: #f7f4ee;
+          display: none;
+          justify-content: center;
+          min-height: clamp(420px, 48vw, 640px);
+          padding: clamp(72px, 9vw, 128px) clamp(24px, 8vw, 112px);
+          text-align: center;
+        }
+
+        .charcoal-judgment-section__content {
+          max-width: min(560px, calc(100vw - 48px));
+          width: 100%;
+        }
+
+        .charcoal-judgment-section h2 {
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(30px, 8.2vw, 46px);
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 0.98;
+          margin: 0;
+        }
+
+        .charcoal-judgment-section h2 span {
+          display: block;
+          white-space: nowrap;
+        }
+
+        .charcoal-judgment-section p {
+          color: rgba(247, 244, 238, 0.92);
+          font-size: clamp(13px, 3.6vw, 16px);
+          font-weight: 750;
+          line-height: 1.18;
+          margin: 22px auto 0;
+          max-width: 300px;
+        }
+
+        .charcoal-judgment-section__button {
+          align-items: center;
+          background: #f7f4ee;
+          border-radius: 999px;
+          color: #262626;
+          display: inline-flex;
+          font-size: 14px;
+          font-weight: 800;
+          justify-content: center;
+          line-height: 1;
+          margin-top: 30px;
+          min-height: 46px;
+          padding: 0 28px;
+          text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+          .charcoal-judgment-section {
+            display: flex;
+            min-height: 430px;
+            padding: 70px 24px;
+          }
+        }
+      `}</style>
+      <div className="charcoal-judgment-section__content">
+        <h2>
+          <span>Execution is free.</span>
+          <span>Now, judgment is</span>
+          <span>everything.</span>
+        </h2>
+        <p>
+          Move beyond benchmark scores and uncover the qualitative signals that
+          shape user preference.
+        </p>
+        <a
+          className="charcoal-judgment-section__button"
+          href="https://contralabs.com/contact"
+        >
+          Request partnership
+        </a>
       </div>
     </section>
   );
@@ -1892,6 +2062,13 @@ export default function Home() {
 
         if (section.name === "07-standard-dark-art") {
           return <StandardDarkArtBlock key={section.name} section={section} />;
+        }
+
+        if (section.name === "laptop-on-desk") {
+          return [
+            <VisualSectionImage key={section.name} section={section} />,
+            <CharcoalJudgmentSection key="charcoal-judgment-section" />,
+          ];
         }
 
         return section.name === "11-footer-artwork" ? (
@@ -2375,18 +2552,15 @@ function FooterBlock({ artwork }: { artwork: VisualSection }) {
           human data &amp; creative evaluation lab
         </p>
         <nav className="site-footer__socials" aria-label="Social links">
-          <a href="https://x.com/contra" aria-label="X">
+          <a href="https://twitter.com/contra" aria-label="Twitter">
             <svg
               className="site-footer__social-icon"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
               <path
-                d="M4 4L20 20M20 4L4 20"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="2"
+                d="M21.5 6.1c-.7.3-1.5.5-2.3.6.8-.5 1.4-1.2 1.7-2.2-.8.5-1.7.8-2.6 1A4.05 4.05 0 0 0 15.3 4c-2.3 0-4.1 1.8-4.1 4.1 0 .3 0 .6.1.9A11.55 11.55 0 0 1 2.9 4.8c-.4.6-.6 1.3-.6 2.1 0 1.4.7 2.7 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4-.3.1-.7.1-1.1.1-.3 0-.5 0-.8-.1.5 1.6 2 2.8 3.8 2.8A8.15 8.15 0 0 1 2.3 18.5c-.3 0-.7 0-1-.1A11.5 11.5 0 0 0 7.5 20c7.5 0 11.6-6.2 11.6-11.6v-.5c.9-.5 1.7-1.1 2.4-1.8Z"
+                fill="currentColor"
               />
             </svg>
           </a>
