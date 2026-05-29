@@ -456,7 +456,6 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           loop
           muted
           playsInline
-          poster="/sections/01-hero.png"
           preload="metadata"
           style={{
             display: "block",
