@@ -5,6 +5,7 @@ import EcosystemHoverCard from "@/components/EcosystemHoverCard";
 import LuxurySaasEditorial from "@/components/LuxurySaasEditorial";
 import MobileMegaMenu from "@/components/MobileMegaMenu";
 import ReaderBeforeNetworkText from "@/components/ReaderBeforeNetworkText";
+import ScrollDirectionClass from "@/components/ScrollDirectionClass";
 
 type VisualSection = {
   alt: string;
@@ -210,8 +211,27 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             display: flex;
             gap: clamp(34px, 4.4vw, 52px);
             left: clamp(38px, 4.4vw, 42px);
-            position: absolute;
+            pointer-events: auto;
+            position: fixed;
             top: 0;
+            transform: translateY(0);
+            transition:
+              opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 990;
+          }
+
+          body.is-scrolling-down:not(.is-page-at-top) .hero-video-copy__nav {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-18px);
+          }
+
+          body.is-scrolling-up .hero-video-copy__nav,
+          body.is-page-at-top .hero-video-copy__nav {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
           }
 
           .hero-video-copy__brand {
@@ -222,35 +242,50 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             font-weight: 800;
             gap: clamp(18px, 2vw, 24px);
             line-height: 1;
+            padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(44px, 3.8vw, 54px));
             text-decoration: none;
           }
 
           .hero-video-copy__mark {
-            background: #83aaa4;
+            background: transparent;
             color: #f7f4ee;
-            display: grid;
-            height: clamp(70px, 8vw, 98px);
-            place-items: start center;
-            padding-top: clamp(22px, 2.4vw, 31px);
-            position: relative;
+            display: block;
+            height: clamp(84px, 9.2vw, 112px);
+            left: clamp(38px, 4.4vw, 42px);
+            overflow: visible;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
             width: clamp(37px, 4.35vw, 50px);
+            z-index: 1000;
           }
 
           .hero-video-copy__mark::after {
-            border-left: clamp(18.5px, 2.175vw, 25px) solid transparent;
-            border-right: clamp(18.5px, 2.175vw, 25px) solid transparent;
-            border-top: clamp(14px, 1.65vw, 19px) solid #83aaa4;
-            bottom: calc(clamp(14px, 1.65vw, 19px) * -1);
             content: "";
-            left: 0;
+            display: none;
+          }
+
+          .hero-video-copy__mark-svg {
+            display: block;
+            height: 100%;
+            inset: 0;
             position: absolute;
+            width: 100%;
+          }
+
+          .hero-video-copy__mark-ribbon {
+            fill: #83aaa4;
           }
 
           .hero-video-copy__spark {
             display: block;
             height: clamp(17px, 1.9vw, 22px);
-            position: relative;
+            left: 50%;
+            position: absolute;
+            top: 31%;
+            transform: translate(-50%, -50%);
             width: clamp(17px, 1.9vw, 22px);
+            z-index: 1;
           }
 
           .hero-video-copy__spark::before,
@@ -285,6 +320,10 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             font-size: 0.74em;
             font-weight: 700;
             margin-left: 0.18em;
+          }
+
+          .hero-video-copy__brand .hero-video-copy__mark {
+            display: none !important;
           }
 
           .hero-video-copy__links {
@@ -334,8 +373,14 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             justify-content: center;
             line-height: 1;
             min-height: clamp(58px, 5.9vw, 64px);
+            overflow: hidden;
             padding: 0 clamp(28px, 3vw, 32px);
+            position: relative;
             text-decoration: none;
+            transition:
+              background-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+              border-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+              color 560ms cubic-bezier(0.19, 1, 0.22, 1);
             white-space: nowrap;
           }
 
@@ -345,11 +390,49 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             min-width: clamp(220px, 21.5vw, 246px);
           }
 
+          .hero-video-copy__button--primary:hover,
+          .hero-video-copy__button--primary:focus-visible {
+            background: #f7f4ee;
+            color: #252321;
+          }
+
+          .hero-video-copy__button-label {
+            display: block;
+            position: relative;
+            transition: transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform;
+          }
+
+          .hero-video-copy__button-label::after {
+            color: #252321;
+            content: attr(data-text);
+            left: 0;
+            position: absolute;
+            top: 230%;
+            white-space: nowrap;
+          }
+
+          .hero-video-copy__button:hover .hero-video-copy__button-label,
+          .hero-video-copy__button:focus-visible .hero-video-copy__button-label {
+            transform: translateY(-230%);
+          }
+
           .hero-video-copy__button--secondary {
             background: rgba(247, 244, 238, 0.64);
             border: 1px solid rgba(37, 35, 33, 0.16);
             color: #252321;
             min-width: clamp(140px, 12.8vw, 146px);
+          }
+
+          .hero-video-copy__button--secondary:hover,
+          .hero-video-copy__button--secondary:focus-visible {
+            background: #252321;
+            border-color: #252321;
+            color: #f7f4ee;
+          }
+
+          .hero-video-copy__button--secondary .hero-video-copy__button-label::after {
+            color: #f7f4ee;
           }
 
           @media (min-width: 901px) and (max-width: 1145px) {
@@ -361,6 +444,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             .hero-video-copy__brand {
               font-size: clamp(20px, 2.4vw, 26px);
               gap: clamp(14px, 1.8vw, 20px);
+              padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(40px, 3.5vw, 48px));
             }
 
             .hero-video-copy__links {
@@ -400,23 +484,22 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             .hero-video-copy__brand {
               font-size: clamp(17px, 5.2vw, 25px);
               gap: 12px;
+              padding-left: 88px;
             }
 
             .hero-video-copy__mark {
-              height: 68px;
-              padding-top: 18px;
+              height: 86px;
+              left: clamp(18px, 6vw, 38px);
               width: 36px;
             }
 
             .hero-video-copy__mark::after {
-              border-left-width: 18px;
-              border-right-width: 18px;
-              border-top-width: 14px;
-              bottom: -14px;
+              display: none;
             }
 
             .hero-video-copy__spark {
               height: 18px;
+              top: 31%;
               width: 18px;
             }
 
@@ -480,6 +563,17 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           <header className="hero-video-copy__nav">
             <a className="hero-video-copy__brand" href="https://contralabs.com/">
               <span className="hero-video-copy__mark" aria-hidden="true">
+                <svg
+                  className="hero-video-copy__mark-svg"
+                  viewBox="0 0 46 96"
+                  preserveAspectRatio="none"
+                  focusable="false"
+                >
+                  <path
+                    className="hero-video-copy__mark-ribbon"
+                    d="M0 0H46V96C37.4 92.1 29.9 85.2 23.8 78.7C23.4 78.25 22.6 78.25 22.2 78.7C16.1 85.2 8.6 92.1 0 96V0Z"
+                  />
+                </svg>
                 <span className="hero-video-copy__spark" />
               </span>
               <span className="hero-video-copy__brand-text">
@@ -507,13 +601,23 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
                 className="hero-video-copy__button hero-video-copy__button--primary"
                 href="https://calendly.com/contra-labs/partnership"
               >
-                Request partnership
+                <span
+                  className="hero-video-copy__button-label"
+                  data-text="Request partnership"
+                >
+                  Request partnership
+                </span>
               </a>
               <a
                 className="hero-video-copy__button hero-video-copy__button--secondary"
                 href="https://contralabs.com/research"
               >
-                Research
+                <span
+                  className="hero-video-copy__button-label"
+                  data-text="Research"
+                >
+                  Research
+                </span>
               </a>
             </div>
           </div>
@@ -1194,8 +1298,42 @@ function StandardDarkArtBlock({ section }: { section: VisualSection }) {
           line-height: 1;
           margin-top: clamp(14px, 2vw, 24px);
           min-height: clamp(38px, 4.6vw, 52px);
+          overflow: hidden;
           padding: 0 clamp(18px, 2.4vw, 30px);
+          position: relative;
           text-decoration: none;
+          transition:
+            background-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            box-shadow 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            color 560ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .standard-dark-art__button:hover,
+        .standard-dark-art__button:focus-visible {
+          background: #252321;
+          box-shadow: inset 0 0 0 1px rgba(255, 250, 243, 0.55);
+          color: #fffaf3;
+        }
+
+        .standard-dark-art__button-label {
+          display: block;
+          position: relative;
+          transition: transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
+          will-change: transform;
+        }
+
+        .standard-dark-art__button-label::after {
+          color: #fffaf3;
+          content: attr(data-text);
+          left: 0;
+          position: absolute;
+          top: 230%;
+          white-space: nowrap;
+        }
+
+        .standard-dark-art__button:hover .standard-dark-art__button-label,
+        .standard-dark-art__button:focus-visible .standard-dark-art__button-label {
+          transform: translateY(-230%);
         }
 
         @media (min-width: 901px) and (max-width: 1145px) {
@@ -1242,7 +1380,12 @@ function StandardDarkArtBlock({ section }: { section: VisualSection }) {
           The creative class sets the standard.
         </h2>
         <a className="standard-dark-art__button" href="#partner">
-          Request partnership
+          <span
+            className="standard-dark-art__button-label"
+            data-text="Request partnership"
+          >
+            Request partnership
+          </span>
         </a>
       </div>
       <video
@@ -1500,8 +1643,42 @@ function NetworkMetricsBlock() {
           font-weight: 600;
           justify-content: center;
           min-height: 54px;
+          overflow: hidden;
           padding: 0 28px;
+          position: relative;
           text-decoration: none;
+          transition:
+            background-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            box-shadow 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            color 560ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .network-section__cta a:hover,
+        .network-section__cta a:focus-visible {
+          background: #252321;
+          box-shadow: inset 0 0 0 1px rgba(247, 244, 238, 0.55);
+          color: #f7f4ee;
+        }
+
+        .network-section__cta-button-label {
+          display: block;
+          position: relative;
+          transition: transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
+          will-change: transform;
+        }
+
+        .network-section__cta-button-label::after {
+          color: #f7f4ee;
+          content: attr(data-text);
+          left: 0;
+          position: absolute;
+          top: 230%;
+          white-space: nowrap;
+        }
+
+        .network-section__cta a:hover .network-section__cta-button-label,
+        .network-section__cta a:focus-visible .network-section__cta-button-label {
+          transform: translateY(-230%);
         }
 
         @media (min-width: 901px) and (max-width: 1145px) {
@@ -1628,7 +1805,14 @@ function NetworkMetricsBlock() {
           ))}
           <article className="network-section__cta">
             <h3>Work with the industry&apos;s top creative minds</h3>
-            <a href="#partner">Request partnership</a>
+            <a href="#partner">
+              <span
+                className="network-section__cta-button-label"
+                data-text="Request partnership"
+              >
+                Request partnership
+              </span>
+            </a>
           </article>
         </div>
       </div>
@@ -1982,8 +2166,42 @@ function CharcoalJudgmentSection() {
           line-height: 1;
           margin-top: 30px;
           min-height: 46px;
+          overflow: hidden;
           padding: 0 28px;
+          position: relative;
           text-decoration: none;
+          transition:
+            background-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            box-shadow 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            color 560ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .charcoal-judgment-section__button:hover,
+        .charcoal-judgment-section__button:focus-visible {
+          background: #262626;
+          box-shadow: inset 0 0 0 1px rgba(247, 244, 238, 0.6);
+          color: #f7f4ee;
+        }
+
+        .charcoal-judgment-section__button-label {
+          display: block;
+          position: relative;
+          transition: transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
+          will-change: transform;
+        }
+
+        .charcoal-judgment-section__button-label::after {
+          color: #f7f4ee;
+          content: attr(data-text);
+          left: 0;
+          position: absolute;
+          top: 230%;
+          white-space: nowrap;
+        }
+
+        .charcoal-judgment-section__button:hover .charcoal-judgment-section__button-label,
+        .charcoal-judgment-section__button:focus-visible .charcoal-judgment-section__button-label {
+          transform: translateY(-230%);
         }
 
         @media (max-width: 700px) {
@@ -2008,16 +2226,117 @@ function CharcoalJudgmentSection() {
           className="charcoal-judgment-section__button"
           href="https://contralabs.com/contact"
         >
-          Request partnership
+          <span
+            className="charcoal-judgment-section__button-label"
+            data-text="Request partnership"
+          >
+            Request partnership
+          </span>
         </a>
       </div>
     </section>
   );
 }
 
+function FixedRibbonMark() {
+  return (
+    <>
+      <style>{`
+        .fixed-ribbon-mark {
+          color: #f7f4ee;
+          display: block;
+          height: clamp(84px, 9.2vw, 112px);
+          left: clamp(38px, 4.4vw, 42px);
+          overflow: visible;
+          pointer-events: none;
+          position: fixed;
+          top: 0;
+          width: clamp(37px, 4.35vw, 50px);
+          z-index: 1150;
+        }
+
+        .fixed-ribbon-mark__svg {
+          display: block;
+          height: 100%;
+          inset: 0;
+          position: absolute;
+          width: 100%;
+        }
+
+        .fixed-ribbon-mark__ribbon {
+          fill: #83aaa4;
+        }
+
+        .fixed-ribbon-mark__spark {
+          display: block;
+          height: clamp(17px, 1.9vw, 22px);
+          left: 50%;
+          position: absolute;
+          top: 31%;
+          transform: translate(-50%, -50%);
+          width: clamp(17px, 1.9vw, 22px);
+          z-index: 1;
+        }
+
+        .fixed-ribbon-mark__spark::before,
+        .fixed-ribbon-mark__spark::after {
+          content: "";
+          left: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .fixed-ribbon-mark__spark::before {
+          background: currentColor;
+          clip-path: polygon(50% 0, 63% 37%, 100% 50%, 63% 63%, 50% 100%, 37% 63%, 0 50%, 37% 37%);
+          height: 100%;
+          width: 100%;
+        }
+
+        .fixed-ribbon-mark__spark::after {
+          background: #83aaa4;
+          clip-path: polygon(50% 18%, 58% 42%, 82% 50%, 58% 58%, 50% 82%, 42% 58%, 18% 50%, 42% 42%);
+          height: 66%;
+          width: 66%;
+        }
+
+        @media (max-width: 900px) {
+          .fixed-ribbon-mark {
+            height: 86px;
+            left: clamp(18px, 6vw, 38px);
+            width: 36px;
+          }
+
+          .fixed-ribbon-mark__spark {
+            height: 18px;
+            width: 18px;
+          }
+        }
+      `}</style>
+      <span className="fixed-ribbon-mark" aria-hidden="true">
+        <svg
+          className="fixed-ribbon-mark__svg"
+          viewBox="0 0 46 96"
+          preserveAspectRatio="none"
+          focusable="false"
+        >
+          <path
+            className="fixed-ribbon-mark__ribbon"
+            d="M0 0H46V96C37.4 92.1 29.9 85.2 23.8 78.7C23.4 78.25 22.6 78.25 22.2 78.7C16.1 85.2 8.6 92.1 0 96V0Z"
+          />
+        </svg>
+        <span className="fixed-ribbon-mark__spark" />
+      </span>
+    </>
+  );
+}
+
 export default function Home() {
   return (
     <main className="visual-site">
+      <ScrollDirectionClass />
+      <FixedRibbonMark />
       <MobileMegaMenu />
       <h1 className="sr-only">
         Contra Labs human data and evaluation lab for creative AI

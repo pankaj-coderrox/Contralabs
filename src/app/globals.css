@@ -55,6 +55,11 @@ video {
   overflow: hidden;
 }
 
+.visual-site > :not(.hero-image-section) {
+  position: relative;
+  z-index: 2;
+}
+
 .visual-section img {
   width: 100%;
   height: auto;

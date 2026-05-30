@@ -184,7 +184,12 @@ export default function LuxurySaasEditorial() {
           </h2>
           <div className="luxury-editorial__cta-wrapper">
             <a className="luxury-editorial__cta" href="#partner">
-              Request partnership
+              <span
+                className="luxury-editorial__cta-label"
+                data-text="Request partnership"
+              >
+                Request partnership
+              </span>
             </a>
           </div>
         </div>
@@ -332,17 +337,45 @@ export default function LuxurySaasEditorial() {
           justify-content: center;
           line-height: 1;
           min-height: 48px;
+          overflow: hidden;
           padding: 0.9rem 2.2rem;
+          position: relative;
           text-decoration: none;
-          transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+          transition:
+            background-color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            box-shadow 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            color 560ms cubic-bezier(0.19, 1, 0.22, 1),
+            transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
           white-space: nowrap;
         }
 
         .luxury-editorial__cta:hover,
         .luxury-editorial__cta:focus-visible {
-          background-color: #000;
+          background-color: #f7f4ee;
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          color: #202020;
           transform: translateY(-2px) scale(1.02);
+        }
+
+        .luxury-editorial__cta-label {
+          display: block;
+          position: relative;
+          transition: transform 560ms cubic-bezier(0.19, 1, 0.22, 1);
+          will-change: transform;
+        }
+
+        .luxury-editorial__cta-label::after {
+          color: #202020;
+          content: attr(data-text);
+          left: 0;
+          position: absolute;
+          top: 230%;
+          white-space: nowrap;
+        }
+
+        .luxury-editorial__cta:hover .luxury-editorial__cta-label,
+        .luxury-editorial__cta:focus-visible .luxury-editorial__cta-label {
+          transform: translateY(-230%);
         }
 
         @keyframes luxury-editorial-scroll-up {

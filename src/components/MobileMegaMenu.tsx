@@ -37,7 +37,9 @@ export default function MobileMegaMenu() {
   }, [isOpen]);
 
   return (
-    <div className="mobile-mega-menu">
+    <div
+      className={`mobile-mega-menu${isOpen ? " mobile-mega-menu--open" : ""}`}
+    >
       <style>{`
         .mobile-mega-menu {
           display: none;
@@ -46,10 +48,28 @@ export default function MobileMegaMenu() {
         @media (max-width: 900px) {
           .mobile-mega-menu {
             display: block;
-            position: absolute;
+            opacity: 1;
+            position: fixed;
             right: 12px;
             top: 10px;
-            z-index: 50;
+            transform: translateY(0);
+            transition:
+              opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 1100;
+          }
+
+          body.is-scrolling-down:not(.is-page-at-top) .mobile-mega-menu:not(.mobile-mega-menu--open) {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-18px);
+          }
+
+          body.is-scrolling-up .mobile-mega-menu,
+          body.is-page-at-top .mobile-mega-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
           }
 
           .mobile-mega-menu__toggle {
@@ -64,7 +84,7 @@ export default function MobileMegaMenu() {
             padding: 0;
             position: relative;
             width: 40px;
-            z-index: 70;
+            z-index: 1210;
           }
 
           .mobile-mega-menu__icon,
@@ -125,7 +145,7 @@ export default function MobileMegaMenu() {
             padding: 0 24px 32px;
             position: fixed;
             width: 100vw;
-            z-index: 60;
+            z-index: 1200;
           }
 
           .mobile-mega-menu__header {
