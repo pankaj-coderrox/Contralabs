@@ -242,7 +242,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             font-weight: 800;
             gap: clamp(18px, 2vw, 24px);
             line-height: 1;
-            padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(44px, 3.8vw, 54px));
+            padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(24px, 2.6vw, 31px));
             text-decoration: none;
           }
 
@@ -343,15 +343,15 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           }
 
           .hero-video-copy__content {
-            left: clamp(76px, 6.6vw, 78px);
+            left: clamp(62px, 5.4vw, 76px);
             position: absolute;
-            top: clamp(150px, 17.2vw, 196px);
+            top: clamp(246px, 25.6vw, 292px);
             width: min(58vw, 680px);
           }
 
           .hero-video-copy__content p {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(39px, 5.3vw, 61px);
+            font-size: clamp(36px, 4.9vw, 56px);
             font-weight: 400;
             letter-spacing: 0;
             line-height: 0.98;
@@ -368,13 +368,13 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             align-items: center;
             border-radius: 999px;
             display: inline-flex;
-            font-size: clamp(16px, 1.7vw, 20px);
+            font-size: clamp(14px, 1.45vw, 17px);
             font-weight: 600;
             justify-content: center;
             line-height: 1;
-            min-height: clamp(58px, 5.9vw, 64px);
+            min-height: clamp(50px, 5vw, 56px);
             overflow: hidden;
-            padding: 0 clamp(28px, 3vw, 32px);
+            padding: 0 clamp(22px, 2.25vw, 26px);
             position: relative;
             text-decoration: none;
             transition:
@@ -387,7 +387,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           .hero-video-copy__button--primary {
             background: #252321;
             color: #f7f4ee;
-            min-width: clamp(220px, 21.5vw, 246px);
+            min-width: clamp(196px, 18.5vw, 218px);
           }
 
           .hero-video-copy__button--primary:hover,
@@ -421,7 +421,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             background: rgba(247, 244, 238, 0.64);
             border: 1px solid rgba(37, 35, 33, 0.16);
             color: #252321;
-            min-width: clamp(140px, 12.8vw, 146px);
+            min-width: clamp(124px, 11vw, 132px);
           }
 
           .hero-video-copy__button--secondary:hover,
@@ -444,7 +444,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             .hero-video-copy__brand {
               font-size: clamp(20px, 2.4vw, 26px);
               gap: clamp(14px, 1.8vw, 20px);
-              padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(40px, 3.5vw, 48px));
+              padding-left: calc(clamp(37px, 4.35vw, 50px) + clamp(24px, 2.6vw, 30px));
             }
 
             .hero-video-copy__links {
@@ -482,9 +482,9 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
             }
 
             .hero-video-copy__brand {
-              font-size: clamp(17px, 5.2vw, 25px);
+              font-size: clamp(19px, 5.7vw, 25px);
               gap: 12px;
-              padding-left: 88px;
+              padding-left: 66px;
             }
 
             .hero-video-copy__mark {
@@ -513,7 +513,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
 
             .hero-video-copy__content {
               left: clamp(26px, 7.2vw, 42px);
-              top: clamp(106px, 23vw, 142px);
+              top: clamp(136px, 33vw, 164px);
               width: min(78%, 440px);
             }
 
@@ -551,9 +551,6 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           preload="metadata"
           style={{
             display: "block",
-            height: "100%",
-            objectFit: "cover",
-            transform: "translate3d(0, 0, 0)",
             width: "100%",
           }}
         >
@@ -2249,10 +2246,10 @@ function FixedRibbonMark() {
           left: clamp(38px, 4.4vw, 42px);
           overflow: visible;
           pointer-events: none;
-          position: fixed;
+          position: fixed !important;
           top: 0;
           width: clamp(37px, 4.35vw, 50px);
-          z-index: 1150;
+          z-index: 1150 !important;
         }
 
         .fixed-ribbon-mark__svg {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const menuItems = [
   {
@@ -19,6 +20,11 @@ const menuItems = [
 
 export default function MobileMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -36,6 +42,69 @@ export default function MobileMegaMenu() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  const menuPanel = (
+    <nav
+      aria-label="Mobile mega menu"
+      className="mobile-mega-menu__panel"
+      id="mobile-mega-menu-panel"
+    >
+      <div className="mobile-mega-menu__header">
+        <a
+          className="mobile-mega-menu__brand"
+          href="https://contralabs.com/"
+          onClick={() => setIsOpen(false)}
+        >
+          <span className="mobile-mega-menu__mark" aria-hidden="true">
+            <svg
+              className="mobile-mega-menu__mark-svg"
+              viewBox="0 0 46 96"
+              preserveAspectRatio="none"
+              focusable="false"
+            >
+              <path
+                className="mobile-mega-menu__mark-ribbon"
+                d="M0 0H46V96C37.4 92.1 29.9 85.2 23.8 78.7C23.4 78.25 22.6 78.25 22.2 78.7C16.1 85.2 8.6 92.1 0 96V0Z"
+              />
+            </svg>
+            <span className="mobile-mega-menu__spark" />
+          </span>
+          <span className="mobile-mega-menu__brand-text">
+            contra <span>LABS</span>
+          </span>
+        </a>
+      </div>
+      <div className="mobile-mega-menu__links">
+        {menuItems.map((item) => (
+          <a
+            className="mobile-mega-menu__item"
+            href={item.href}
+            key={item.title}
+            onClick={() => setIsOpen(false)}
+          >
+            {item.title}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+
   return (
     <div
       className={`mobile-mega-menu${isOpen ? " mobile-mega-menu--open" : ""}`}
@@ -48,15 +117,30 @@ export default function MobileMegaMenu() {
         @media (max-width: 900px) {
           .mobile-mega-menu {
             display: block;
+            left: auto !important;
             opacity: 1;
-            position: fixed;
-            right: 12px;
-            top: 10px;
+            position: fixed !important;
+            right: clamp(18px, 5vw, 24px) !important;
+            top: clamp(18px, 5vw, 24px) !important;
             transform: translateY(0);
             transition:
               opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
               transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 1100;
+            width: 40px;
+            z-index: 1500;
+          }
+
+          .mobile-mega-menu--open {
+            height: 100vh;
+            height: 100svh;
+            inset: 0 !important;
+            left: 0 !important;
+            pointer-events: none;
+            right: auto !important;
+            top: 0 !important;
+            transform: none !important;
+            width: 100vw;
+            z-index: 10020;
           }
 
           body.is-scrolling-down:not(.is-page-at-top) .mobile-mega-menu:not(.mobile-mega-menu--open) {
@@ -84,7 +168,15 @@ export default function MobileMegaMenu() {
             padding: 0;
             position: relative;
             width: 40px;
-            z-index: 1210;
+            z-index: 1520;
+          }
+
+          .mobile-mega-menu--open .mobile-mega-menu__toggle {
+            pointer-events: auto;
+            position: fixed;
+            right: clamp(18px, 5vw, 24px);
+            top: clamp(18px, 5vw, 24px);
+            z-index: 10030;
           }
 
           .mobile-mega-menu__icon,
@@ -132,67 +224,92 @@ export default function MobileMegaMenu() {
           }
 
           .mobile-mega-menu__panel {
+            animation: mobileMegaMenuIn 420ms cubic-bezier(0.22, 1, 0.36, 1);
             background:
               radial-gradient(rgba(37, 35, 33, 0.04) 0.5px, transparent 0.5px),
               #f7f4ee;
             background-size: 3px 3px;
+            box-sizing: border-box;
             color: #252321;
             display: flex;
             flex-direction: column;
             inset: 0;
+            height: 100vh;
             height: 100svh;
+            min-height: 100vh;
+            min-height: 100svh;
+            overscroll-behavior: none;
             overflow: hidden;
-            padding: 0 24px 32px;
+            padding: 0 clamp(24px, 6.4vw, 30px) 32px;
             position: fixed;
             width: 100vw;
-            z-index: 1200;
+            z-index: 10000;
+          }
+
+          @keyframes mobileMegaMenuIn {
+            from {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
 
           .mobile-mega-menu__header {
             align-items: flex-start;
+            border-bottom: 1px solid rgba(37, 35, 33, 0.14);
             display: flex;
-            min-height: 122px;
+            min-height: clamp(112px, 27vw, 126px);
           }
 
           .mobile-mega-menu__brand {
             align-items: flex-start;
             color: #252321;
             display: inline-flex;
-            font-size: 29px;
+            font-size: clamp(25px, 7vw, 30px);
             font-weight: 800;
-            gap: 17px;
+            gap: clamp(16px, 4vw, 20px);
             line-height: 1;
             text-decoration: none;
           }
 
           .mobile-mega-menu__mark {
-            background: #83aaa4;
             color: #f7f4ee;
-            display: grid;
-            font-size: 23px;
-            height: 61px;
+            display: block;
+            height: clamp(72px, 18vw, 82px);
             line-height: 1;
-            place-items: start center;
-            padding-top: 16px;
             position: relative;
-            width: 35px;
+            width: clamp(39px, 9.8vw, 45px);
           }
 
           .mobile-mega-menu__mark::after {
-            border-left: 17.5px solid transparent;
-            border-right: 17.5px solid transparent;
-            border-top: 14px solid #83aaa4;
-            bottom: -14px;
-            content: "";
-            left: 0;
+            content: none;
+          }
+
+          .mobile-mega-menu__mark-svg {
+            display: block;
+            height: 100%;
+            inset: 0;
             position: absolute;
+            width: 100%;
+          }
+
+          .mobile-mega-menu__mark-ribbon {
+            fill: #83aaa4;
           }
 
           .mobile-mega-menu__spark {
             display: block;
-            height: 18px;
-            position: relative;
-            width: 18px;
+            height: clamp(17px, 4.4vw, 20px);
+            left: 50%;
+            position: absolute;
+            top: 31%;
+            transform: translate(-50%, -50%);
+            width: clamp(17px, 4.4vw, 20px);
+            z-index: 1;
           }
 
           .mobile-mega-menu__spark::before,
@@ -207,20 +324,20 @@ export default function MobileMegaMenu() {
 
           .mobile-mega-menu__spark::before {
             clip-path: polygon(50% 0, 63% 37%, 100% 50%, 63% 63%, 50% 100%, 37% 63%, 0 50%, 37% 37%);
-            height: 18px;
-            width: 18px;
+            height: 100%;
+            width: 100%;
           }
 
           .mobile-mega-menu__spark::after {
             background: #83aaa4;
             clip-path: polygon(50% 18%, 58% 42%, 82% 50%, 58% 58%, 50% 82%, 42% 58%, 18% 50%, 42% 42%);
-            height: 12px;
-            width: 12px;
+            height: 66%;
+            width: 66%;
           }
 
           .mobile-mega-menu__brand-text {
             letter-spacing: -0.02em;
-            padding-top: 18px;
+            padding-top: clamp(19px, 5vw, 23px);
             white-space: nowrap;
           }
 
@@ -231,7 +348,6 @@ export default function MobileMegaMenu() {
           }
 
           .mobile-mega-menu__links {
-            border-top: 1px solid rgba(37, 35, 33, 0.14);
             display: grid;
           }
 
@@ -239,12 +355,12 @@ export default function MobileMegaMenu() {
             border-bottom: 1px solid rgba(37, 35, 33, 0.14);
             color: inherit;
             display: flex;
-            font-size: clamp(18px, 2.8vw, 22px);
-            font-weight: 500;
+            font-size: clamp(18px, 4.2vw, 20px);
+            font-weight: 400;
             justify-content: space-between;
             letter-spacing: 0;
             line-height: 1;
-            padding: 35px 0;
+            padding: clamp(33px, 8.6vw, 39px) 0;
             text-decoration: none;
           }
 
@@ -287,40 +403,7 @@ export default function MobileMegaMenu() {
       >
         <span className="mobile-mega-menu__icon" aria-hidden="true" />
       </button>
-      {isOpen ? (
-        <nav
-          aria-label="Mobile mega menu"
-          className="mobile-mega-menu__panel"
-          id="mobile-mega-menu-panel"
-        >
-          <div className="mobile-mega-menu__header">
-            <a
-              className="mobile-mega-menu__brand"
-              href="https://contralabs.com/"
-              onClick={() => setIsOpen(false)}
-            >
-              <span className="mobile-mega-menu__mark" aria-hidden="true">
-                <span className="mobile-mega-menu__spark" />
-              </span>
-              <span className="mobile-mega-menu__brand-text">
-                contra <span>LABS</span>
-              </span>
-            </a>
-          </div>
-          <div className="mobile-mega-menu__links">
-            {menuItems.map((item) => (
-              <a
-                className="mobile-mega-menu__item"
-                href={item.href}
-                key={item.title}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.title}
-              </a>
-            ))}
-          </div>
-        </nav>
-      ) : null}
+      {isMounted && isOpen ? createPortal(menuPanel, document.body) : null}
     </div>
   );
 }
