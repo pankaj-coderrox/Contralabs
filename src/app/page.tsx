@@ -345,34 +345,34 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           .hero-video-copy__content {
             left: clamp(62px, 5.4vw, 76px);
             position: absolute;
-            top: clamp(246px, 25.6vw, 292px);
-            width: min(58vw, 680px);
+            top: clamp(188px, 17.4vw, 204px);
+            width: min(68vw, 740px);
           }
 
           .hero-video-copy__content p {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(36px, 4.9vw, 56px);
+            font-size: clamp(36px, 4.72vw, 54px);
             font-weight: 400;
             letter-spacing: 0;
-            line-height: 0.98;
+            line-height: 1;
             margin: 0;
           }
 
           .hero-video-copy__actions {
             display: flex;
-            gap: clamp(28px, 3vw, 35px);
-            margin-top: clamp(28px, 3.2vw, 38px);
+            gap: clamp(24px, 2.65vw, 30px);
+            margin-top: clamp(28px, 3vw, 34px);
           }
 
           .hero-video-copy__button {
             align-items: center;
             border-radius: 999px;
             display: inline-flex;
-            font-size: clamp(14px, 1.45vw, 17px);
+            font-size: clamp(14px, 1.34vw, 16px);
             font-weight: 600;
             justify-content: center;
             line-height: 1;
-            min-height: clamp(50px, 5vw, 56px);
+            min-height: clamp(48px, 4.7vw, 54px);
             overflow: hidden;
             padding: 0 clamp(22px, 2.25vw, 26px);
             position: relative;
@@ -387,7 +387,7 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           .hero-video-copy__button--primary {
             background: #252321;
             color: #f7f4ee;
-            min-width: clamp(196px, 18.5vw, 218px);
+            min-width: clamp(190px, 18vw, 210px);
           }
 
           .hero-video-copy__button--primary:hover,
@@ -457,21 +457,22 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
 
             .hero-video-copy__content {
               left: clamp(48px, 6.6vw, 76px);
-              top: clamp(138px, 17vw, 176px);
-              width: min(60vw, 610px);
+              top: clamp(166px, 17.2vw, 196px);
+              width: min(68vw, 700px);
             }
 
             .hero-video-copy__content p {
-              font-size: clamp(40px, 5.15vw, 56px);
+              font-size: clamp(38px, 4.8vw, 52px);
+              line-height: 1;
             }
 
             .hero-video-copy__button {
-              font-size: clamp(14px, 1.7vw, 18px);
-              min-height: clamp(50px, 5.8vw, 60px);
+              font-size: clamp(14px, 1.5vw, 16px);
+              min-height: clamp(48px, 5vw, 54px);
             }
 
             .hero-video-copy__button--primary {
-              min-width: clamp(190px, 21vw, 226px);
+              min-width: clamp(188px, 19vw, 212px);
             }
           }
 
@@ -551,6 +552,9 @@ function VisualSectionImage({ section }: { section: VisualSection }) {
           preload="metadata"
           style={{
             display: "block",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
             width: "100%",
           }}
         >

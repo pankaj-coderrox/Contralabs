@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 const menuItems = [
   {
@@ -20,11 +19,6 @@ const menuItems = [
 
 export default function MobileMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -96,7 +90,6 @@ export default function MobileMegaMenu() {
             className="mobile-mega-menu__item"
             href={item.href}
             key={item.title}
-            onClick={() => setIsOpen(false)}
           >
             {item.title}
           </a>
@@ -135,7 +128,7 @@ export default function MobileMegaMenu() {
             height: 100svh;
             inset: 0 !important;
             left: 0 !important;
-            pointer-events: none;
+            pointer-events: auto;
             right: auto !important;
             top: 0 !important;
             transform: none !important;
@@ -243,7 +236,7 @@ export default function MobileMegaMenu() {
             padding: 0 clamp(24px, 6.4vw, 30px) 32px;
             position: fixed;
             width: 100vw;
-            z-index: 10000;
+            z-index: 10020;
           }
 
           @keyframes mobileMegaMenuIn {
@@ -349,11 +342,13 @@ export default function MobileMegaMenu() {
 
           .mobile-mega-menu__links {
             display: grid;
+            pointer-events: auto;
           }
 
           .mobile-mega-menu__item {
             border-bottom: 1px solid rgba(37, 35, 33, 0.14);
             color: inherit;
+            cursor: pointer;
             display: flex;
             font-size: clamp(18px, 4.2vw, 20px);
             font-weight: 400;
@@ -361,6 +356,7 @@ export default function MobileMegaMenu() {
             letter-spacing: 0;
             line-height: 1;
             padding: clamp(33px, 8.6vw, 39px) 0;
+            pointer-events: auto;
             text-decoration: none;
           }
 
@@ -403,7 +399,7 @@ export default function MobileMegaMenu() {
       >
         <span className="mobile-mega-menu__icon" aria-hidden="true" />
       </button>
-      {isMounted && isOpen ? createPortal(menuPanel, document.body) : null}
+      {isOpen ? menuPanel : null}
     </div>
   );
 }
