@@ -106,8 +106,8 @@ const floatingCards: FloatingCard[] = [
     src: "/sections/08-leading-research-mobile-art.png",
     alt: "Mobile leading research artwork",
     style: {
-      "--card-x": "92%",
-      "--card-y": "34%",
+      "--card-x": "14%",
+      "--card-y": "18%",
       "--card-width": "clamp(62px, 16vw, 125px)",
       "--card-rotate": "-8deg",
     },
@@ -116,8 +116,8 @@ const floatingCards: FloatingCard[] = [
     src: "/sections/08-research-followup.png",
     alt: "Research followup artwork",
     style: {
-      "--card-x": "34%",
-      "--card-y": "12%",
+      "--card-x": "86%",
+      "--card-y": "18%",
       "--card-width": "clamp(66px, 16vw, 130px)",
       "--card-rotate": "4deg",
     },
@@ -126,8 +126,8 @@ const floatingCards: FloatingCard[] = [
     src: "/sections/training-data-intro.png",
     alt: "Training data artwork",
     style: {
-      "--card-x": "66%",
-      "--card-y": "12%",
+      "--card-x": "14%",
+      "--card-y": "84%",
       "--card-width": "clamp(68px, 17vw, 135px)",
       "--card-rotate": "-4deg",
     },
@@ -136,8 +136,8 @@ const floatingCards: FloatingCard[] = [
     src: "/sections/laptop-on-desk.jpeg",
     alt: "Laptop on desk artwork",
     style: {
-      "--card-x": "50%",
-      "--card-y": "88%",
+      "--card-x": "86%",
+      "--card-y": "84%",
       "--card-width": "clamp(76px, 19vw, 150px)",
       "--card-rotate": "3deg",
     },
@@ -175,6 +175,7 @@ export default function EditorialParallaxSection() {
         autoAlpha: 0,
         opacity: 0,
         visibility: "hidden",
+        x: 0,
         y: 0,
         zIndex: 0,
       };
@@ -182,8 +183,25 @@ export default function EditorialParallaxSection() {
         autoAlpha: 1,
         opacity: 1,
         visibility: "visible",
+        x: 0,
         y: 0,
         zIndex: 10,
+      };
+      const enterFromBelowTextState = {
+        ...hiddenTextState,
+        scale: 0.72,
+        y: 0,
+      };
+      const smallCenteredTextState = {
+        ...visibleTextState,
+        scale: 0.72,
+        transformOrigin: "50% 50%",
+        x: 0,
+        y: 0,
+      };
+      const smallLowerTextState = {
+        ...smallCenteredTextState,
+        y: 64,
       };
 
       gsap.set(textMessages, hiddenTextState);
@@ -315,7 +333,7 @@ export default function EditorialParallaxSection() {
         },
       ];
 
-      const sequenceEnd = 4.7;
+      const sequenceEnd = 5.2;
 
       imageParallax.forEach((motion, index) => {
         const card = cardElements[index];
@@ -395,58 +413,61 @@ export default function EditorialParallaxSection() {
             ...visibleTextState,
             scale: 0.72,
             transformOrigin: "50% 50%",
-            duration: 0.4,
+            duration: 0.8,
             ease: "none",
           },
           1.5,
         )
-        .addLabel("text-2", 1.9)
-        .set(textThree, hiddenTextState, 1.9)
+        .addLabel("text-2", 2.3)
+        .set(textThree, hiddenTextState, 2.3)
         .fromTo(
           textTwo,
-          hiddenTextState,
+          enterFromBelowTextState,
           {
-            ...visibleTextState,
-            duration: 0.3,
-            ease: "none",
+            ...smallCenteredTextState,
+            duration: 0.42,
+            ease: "power2.out",
             immediateRender: false,
           },
-          1.9,
+          2.3,
         )
         .to(
           textOne,
           {
             ...hiddenTextState,
             scale: 0.72,
-            duration: 0.3,
-            ease: "none",
+            duration: 0.34,
+            ease: "power2.out",
+            y: -28,
           },
-          1.95,
+          2.35,
         )
-        .to(textTwo, { ...visibleTextState, duration: 0.75, ease: "none" }, 2.2)
+        .to(textTwo, { ...smallCenteredTextState, duration: 1.1, ease: "none" }, 2.72)
         .to(
           textTwo,
           {
             ...hiddenTextState,
-            duration: 0.3,
-            ease: "none",
+            duration: 0.34,
+            ease: "power2.out",
+            scale: 0.72,
+            y: 0,
           },
-          3,
+          3.82,
         )
-        .addLabel("text-3", 3.3)
-        .set(textOne, hiddenTextState, 3.3)
+        .addLabel("text-3", 3.82)
+        .set(textOne, hiddenTextState, 3.82)
         .fromTo(
           textThree,
-          hiddenTextState,
+          { ...enterFromBelowTextState, y: 90 },
           {
-            ...visibleTextState,
-            duration: 0.3,
-            ease: "none",
+            ...smallLowerTextState,
+            duration: 0.42,
+            ease: "power2.out",
             immediateRender: false,
           },
-          3.3,
+          3.82,
         )
-        .to(textThree, { ...visibleTextState, duration: 1.1, ease: "none" }, 3.6);
+        .to(textThree, { ...smallLowerTextState, duration: 1.0, ease: "none" }, 4.24);
 
       return () => {
         timeline.kill();
@@ -467,7 +488,7 @@ export default function EditorialParallaxSection() {
           background: #f7f4ee;
           color: #252321;
           display: grid;
-          height: 190vh;
+          height: 220vh;
           isolation: isolate;
           overflow-x: clip;
           overflow-y: visible;
@@ -549,8 +570,12 @@ export default function EditorialParallaxSection() {
           max-width: min(900px, calc(100vw - 44px));
           min-height: clamp(160px, 32vw, 330px);
           opacity: 0;
+          place-self: center;
           position: relative;
+          transform-origin: 50% 50%;
+          will-change: opacity, transform;
           visibility: hidden;
+          width: min(900px, calc(100vw - 44px));
           white-space: pre-line;
           z-index: 0;
         }
@@ -617,27 +642,27 @@ export default function EditorialParallaxSection() {
           }
 
           .editorial-parallax-base__card:nth-child(9) {
-            --card-x: 22%;
-            --card-y: 34%;
-            --card-width: 170px;
+            --card-x: 16%;
+            --card-y: 22%;
+            --card-width: 150px;
           }
 
           .editorial-parallax-base__card:nth-child(10) {
-            --card-x: 78%;
-            --card-y: 34%;
-            --card-width: 175px;
+            --card-x: 84%;
+            --card-y: 22%;
+            --card-width: 152px;
           }
 
           .editorial-parallax-base__card:nth-child(11) {
-            --card-x: 30%;
-            --card-y: 78%;
-            --card-width: 160px;
+            --card-x: 18%;
+            --card-y: 82%;
+            --card-width: 145px;
           }
 
           .editorial-parallax-base__card:nth-child(12) {
-            --card-x: 70%;
-            --card-y: 78%;
-            --card-width: 185px;
+            --card-x: 82%;
+            --card-y: 82%;
+            --card-width: 158px;
           }
         }
       `}</style>
