@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import EditorialGridSection from "@/components/EditorialGridSection";
+import EditorialParallaxSection from "@/components/EditorialParallaxSection";
 import EcosystemHoverCard from "@/components/EcosystemHoverCard";
 import LuxurySaasEditorial from "@/components/LuxurySaasEditorial";
 import MobileMegaMenu from "@/components/MobileMegaMenu";
@@ -2404,14 +2405,7 @@ export default function Home() {
 function FragmentWithNetwork() {
   return (
     <>
-      <VisualSectionImage
-        section={{
-          name: "05-reader-before-network",
-          width: 1145,
-          height: 1138,
-          alt: "Whitespace before Network of Human Taste section",
-        }}
-      />
+      <EditorialParallaxSection />
       <NetworkMetricsBlock />
     </>
   );
